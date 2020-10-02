@@ -162,16 +162,10 @@ Flickable {
     VPNFooterLink {
         text: qsTr("Sign out")
         Layout.alignment: Qt.AlignHCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 40
         color: Theme.red
         font.weight: Font.Bold
         font.family: vpnFont.name
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: VPNController.logout()
-        }
+        onClicked: VPNController.logout()
     }
 
     ScrollBar.vertical: ScrollBar {}
