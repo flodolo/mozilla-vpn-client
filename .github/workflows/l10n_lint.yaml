@@ -1,4 +1,4 @@
-name: Check for l10n issues
+name: Linters (clang, l10n)
 on:
   # Triggers the workflow on pull request events but only for the main branch
   pull_request:
@@ -13,7 +13,7 @@ jobs:
           # Add external PPA, latest version of QT is 5.12.x for Ubuntu 20.04
           sudo add-apt-repository ppa:beineri/opt-qt-5.15.0-focal -y
           sudo apt update
-          sudo apt install git qt515tools -y
+          sudo apt install git clang-format qt515tools -y
       - name: Clone repository
         uses: actions/checkout@v2
       - name: Set up Python 3
@@ -29,3 +29,8 @@ jobs:
           export PATH=/opt/qt515/bin:$PATH
           lupdate -version
           python .github/l10n/check_l10n_issues.py
+      - name: Check for issues with clang-format
+        run: |
+          # Copy the script to avoid moving around .clang-* files
+          cp .github/clang/run-clang-format.py .
+          python run-clang-format.py . -r
