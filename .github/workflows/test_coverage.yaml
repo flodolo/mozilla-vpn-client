@@ -31,7 +31,7 @@ jobs:
         run: |
           # Manually add QT executables to path
           export PATH=/opt/qt515/bin:$PATH
-          /opt/qt515/bin/qmake QMAKE_CXX=clang++ QMAKE_LINK=clang++ CONFIG+=debug
+          qmake QMAKE_CXX=clang++ QMAKE_LINK=clang++ CONFIG+=debug
           make -j8
       - name: Run the test script
         shell: bash
